@@ -18,7 +18,7 @@ document.getElementById("submitGrades").addEventListener("click", function() {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": "Bearer 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" // Replace with your API key
+            "Authorization": "Bearer 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" // Replace with your API key
         },
         body: JSON.stringify(data)
     })
