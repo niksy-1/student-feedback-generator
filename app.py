@@ -18,7 +18,7 @@ def generate_feedback():
     response = requests.post(
         'https://api.openai.com/v1/engines/davinci/completions',
         headers={
-            'Authorization': f'Bearer YOUR_REAL_API_KEY',
+            'Authorization': f'Bearer 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',
             'Content-Type': 'application/json'
         },
         json={
