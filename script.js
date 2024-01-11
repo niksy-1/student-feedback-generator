@@ -4,29 +4,30 @@ document.getElementById("submitGrades").addEventListener("click", function() {
     const communication = document.getElementById("communication").value;
     const criticalThinking = document.getElementById("criticalThinking").value;
 
+    // Construct the data object to send to the server
     const data = {
-        prompt: `Generate feedback for a student based on the following grades:\n` +
-                `Knowledge and Understanding: ${knowledgeUnderstanding}\n` +
-                `Investigation: ${investigation}\n` +
-                `Communication: ${communication}\n` +
-                `Critical Thinking: ${criticalThinking}\n`,
-        temperature: 0.7,
-        max_tokens: 150
+        knowledgeUnderstanding: knowledgeUnderstanding,
+        investigation: investigation,
+        communication: communication,
+        criticalThinking: criticalThinking
     };
 
-    fetch("https://api.openai.com/v1/engines/davinci/completions", {
-        method: "POST",
+    // Make the request to the server-side endpoint
+    fetch('/generate_feedback', {
+        method: 'POST',
         headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer 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" // Replace with your API key
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify(data)
     })
     .then(response => response.json())
     .then(data => {
-        document.getElementById("feedback").innerText = data.choices[0].text.trim();
+        // Output the response from your server to the feedback div
+        document.getElementById("feedback").innerText = data.feedback;
     })
     .catch(error => {
+        // Handle errors
         console.error('Error:', error);
+        document.getElementById("feedback").innerText = 'An error occurred while generating feedback.';
     });
 });
